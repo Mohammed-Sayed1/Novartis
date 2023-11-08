@@ -1,0 +1,114 @@
+<!-- Novartis Dashboard's Home Page -->
+
+<!-- Cards -->
+<div class="row">
+  <!-- City Count -->
+  <div class="col-sm">
+    <div class="card">
+      <div class="card-header justify-content-center">
+        <h4 class="card-title">City Count</h4>
+      </div>
+
+      <div class="card-body">
+        <p class="card-text text-center" style="font-weight: bold; font-size: 1.5rem;">30</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hospital Count -->
+  <div class="col-sm">
+    <div class="card">
+      <div class="card-header justify-content-center">
+        <h4 class="card-title">Hospital Count</h4>
+      </div>
+
+      <div class="card-body">
+        <p class="card-text text-center" style="font-weight: bold; font-size: 1.5rem;">50</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Number Of Doctors -->
+  <div class="col-sm">
+    <div class="card">
+      <div class="card-header justify-content-center">
+        <h4 class="card-title">Number Of Doctors</h4>
+      </div>
+
+      <div class="card-body">
+        <p class="card-text text-center" style="font-weight: bold; font-size: 1.5rem;">70</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Charts -->
+<div class="row">
+  <div class="col col-md-6" *ngFor="let chartConfig of chartConfigs">
+    <div class="card">
+      <div class="card-body">
+
+          <h4
+          *ngIf="chartConfig.data.length === 0"
+            class="card-title pt-3 px-2 text-warning"
+            style="text-align: center"
+          >
+            No Data To Display.
+          </h4>
+          <app-chart
+          *ngIf="chartConfig.data.length > 0"
+            [chartType]="chartConfig.type"
+            [chartData]="chartConfig.data"
+            [chartLabels]="chartConfig.labels"
+            [chartOptions]="chartConfig.options"
+            [chartTitle]="chartConfig.title"
+          ></app-chart>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Table -->
+<table class="table table-responsive-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">no. of doctors</th>
+      <th scope="col">hospital name</th>
+      <th scope="col">city name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>5</td>
+      <td>King Fahad Medical</td>
+      <td>Riyadh</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>7</td>
+      <td>Abdul Lateef Jameel Hospital</td>
+      <td>Jeddah</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>9</td>
+      <td>Almana General Hospital</td>
+      <td>Damman</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>11</td>
+      <td>Saudi German Hospital</td>
+      <td>Madinah</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>13</td>
+      <td>Saudi National Hospital</td>
+      <td>Mecca</td>
+    </tr>
+  </tbody>
+</table>

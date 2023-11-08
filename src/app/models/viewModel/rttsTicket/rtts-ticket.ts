@@ -1,0 +1,62 @@
+import { Time } from "@angular/common";
+import { Timestamp } from "rxjs/internal/operators/timestamp";
+
+//export class  {
+export class RttsTicketsVM {
+    ticketnumber?: string;
+    create_date?: string;
+    last_clear_date?: string;
+    close_date?: string;
+    close_month?: string;
+    close_week?: number;
+    alarm_reported_date?: string;
+    service_impacted?: string;
+    service_technology?: string;
+    severity?: string;
+    status?: string;
+    sub_network?: string;
+    abstracts?: string;
+    node?: string;
+    wrong_referral_count?: number;
+    node_classification?: string;
+    node_classification_category?: string;
+    additional_nodes?: string;
+    fttx_spo?: string;
+    en_range?: string;
+    additional_card?: string;
+    first_referred_by?: string;
+    referred_group?: string;
+    initiated_by?: string;
+    originator_group?: string;
+    originator_login?: string;
+    cleared_by_group?: string;
+    district?: string;
+    fault_area?: string;
+    parent_tt?: string;
+    fault_area_detail?: string;
+    repair_details?: string;
+    permanent_solution?: string;
+    root_cause?: string;
+    root_cause_detail?: string;
+    final_resolution_time?: string;
+    final_resolution?: string;
+    response_breached_sla?: string;
+    restoration_breached_1st_sla?: string;
+    restoration_breached_2nd_sla?: string;
+    mttr_e2e_ticket_days?: number;
+    response?: string;
+    restoration?: string;
+    resolution?: string;
+    fixed_unoc_total_hub_time?: string;
+    unoc_sl_hub_time?: string;
+    id?: number;
+    row_version?: string;
+    data_source?: string;
+    coap_feedback?: string;
+    SLA?:string;
+    Icon?:string;
+    ResolutionStr?:string;
+    IsChecked?: boolean;
+    restoration_time?: number;
+}
+//}
