@@ -9,6 +9,7 @@ import { ContentHeaderModule } from 'app/layout/components/content-header/conten
 import { SampleComponent } from './sample.component';
 import { HomeComponent } from './home.component';
 import { DashboardModule } from 'app/modules/dashboard/dashboard.module';
+import { AuthGuard } from 'app/auth/helpers';
 
 const routes = [
   {
@@ -19,7 +20,8 @@ const routes = [
   {
     path: 'home',
     component: HomeComponent,
-    data: { animation: 'home' }
+    data: { animation: 'home' },
+    canActivate: [AuthGuard]
   }
 ];
 

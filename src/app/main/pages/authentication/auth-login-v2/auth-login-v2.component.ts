@@ -75,27 +75,28 @@ export class AuthLoginV2Component implements OnInit {
   }
 
   // adding authentication
-  // onSubmit() {
-  //   this.submitted = true
-  //   // stop here if form is invalid
-  //   if (this.loginForm.invalid) {
-  //     return
-  //   }
-  //   // Login
-  //   this.loading = true
-  //   this._authenticationService
-  //     .login(this.f.email.value, this.f.password.value)
-  //     .pipe(first())
-  //     .subscribe(
-  //       data => {
-  //         this._router.navigate([this.returnUrl])
-  //       },
-  //       error => {
-  //         this.error = error
-  //         this.loading = false
-  //       }
-  //     )
-  // }
+  onSubmit() {
+    this.submitted = true
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return
+    }
+    // Login
+    this.loading = true
+    this._authenticationService
+      .login(this.f.email.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          // this._router.navigate([this.returnUrl])
+          this._router.navigateByUrl('/home')
+        },
+        error => {
+          this.error = error
+          this.loading = false
+        }
+      )
+  }
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -116,10 +117,6 @@ export class AuthLoginV2Component implements OnInit {
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       this.coreConfig = config;
     });
-  }
-
-  login() {
-    this._router.navigateByUrl('/home')
   }
 
   /**
