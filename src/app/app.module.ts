@@ -20,6 +20,7 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { ChartsModule } from 'ng2-charts';
 import { ErrorInterceptor, JwtInterceptor, fakeBackendProvider } from './auth/helpers';
+import { MessagesModule } from './modules/messages/messages.module';
 
 const appRoutes: Routes = [
   {
@@ -65,7 +66,10 @@ const appRoutes: Routes = [
     SampleModule,
 
     // ChartsModule
-    ChartsModule
+    ChartsModule,
+
+    // Messages module
+    MessagesModule
   ],
 
   bootstrap: [AppComponent],

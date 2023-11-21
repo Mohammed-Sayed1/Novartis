@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Label } from "ng2-charts";
 import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
+import { HospitalsService } from "../../services/hospitals.service";
+import { Hospital } from "app/models/viewModel/dashboard/hospital";
 
 // interface ChartConfig {
 //   type: ChartType;
@@ -17,6 +19,8 @@ import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
   styleUrls: ["./dashbord.component.scss"],
 })
 export class DashbordComponent implements OnInit {
+  hospitalsList: Hospital[];
+
   chartConfigs = [
     {
       type: "doughnut",
@@ -81,8 +85,8 @@ export class DashbordComponent implements OnInit {
             "#9E9E9E", // Dark Gray
             "#666666", // Medium Gray
             "#333333", // Dark Gray
-          ], 
-        }
+          ],
+        },
       ],
       labels: [
         "Pulmonology",
@@ -117,7 +121,7 @@ export class DashbordComponent implements OnInit {
             "#666666", // Medium Gray
             "#333333", // Dark Gray
           ],
-        }
+        },
       ],
       labels: [
         "Riyadh",
@@ -159,7 +163,7 @@ export class DashbordComponent implements OnInit {
             "#BDBDBD", // Grey
             "#CFD8DC", // Silver
           ],
-        }
+        },
       ],
       labels: [
         "",
@@ -190,80 +194,19 @@ export class DashbordComponent implements OnInit {
       },
       title: "Hospitals",
     },
-    {
-      type: "bar", // Set the chart type to "bar" for a bar chart
-      data: [
-        {
-          data: [3, 5, 7, 9, 10, 13, 5, 7, 9, 10, 13, 5, 7, 9, 10, 13],
-          backgroundColor: [
-            "#607D8B", // Blue Grey
-            "#BDBDBD", // Grey
-            "#CFD8DC", // Silver
-            "#9E9E9E", // Dark Gray
-            "#666666", // Medium Gray
-            "#333333", // Dark Gray
-            "#607D8B", // Blue Grey
-            "#BDBDBD", // Grey
-            "#CFD8DC", // Silver
-            "#9E9E9E", // Dark Gray
-            "#666666", // Medium Gray
-            "#333333", // Dark Gray
-            "#607D8B", // Blue Grey
-            "#BDBDBD", // Grey
-            "#CFD8DC", // Silver
-          ],
-        },
-      ],
-      labels: [
-        "Label 1",
-        "Label 2",
-        "Label 3",
-        "Label 4",
-        "Label 5",
-        "Label 6",
-        "Label 7",
-        "Label 8",
-        "Label 9",
-        "Label 10",
-        "Label 11",
-        "Label 12",
-        "Label 13",
-        "Label 14",
-        "Label 15",
-        "Label 16",
-      ],
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        tooltips: {
-          callbacks: {
-            label: this.tooltipLabelCallback,
-          },
-        },
-        scales: {
-          xAxes: [{
-              gridLines: {
-                  offsetGridLines: true
-              }
-          }]
-      },
-        plugins: {
-          legend: {
-            display: false, // Set the legend display to false to hide it
-          },
-        },
-        title: {
-          display: true,
-          text: "Hospitals",
-        },
-      },
-      title: "Hospitals",
-    }
   ];
 
-  constructor() {}
+  constructor(private _hospitalsService: HospitalsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getAllHospitals();
+  }
+
+  getAllHospitals() {
+    this._hospitalsService.gitHospitals().subscribe((data) => {
+      this.hospitalsList = data;
+    });
+  }
 
   tooltipLabelCallback(tooltipItem, data): string {
     // Calculate the total of all data points

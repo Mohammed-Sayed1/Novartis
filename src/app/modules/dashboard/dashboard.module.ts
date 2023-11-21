@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashbordComponent } from './dashbord/dashbord.component';
+import { DashbordComponent } from './components/dashbord/dashbord.component';
 import { ChartsModule } from 'ng2-charts';
-import { ChartComponent } from './chart/chart.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 
 @NgModule({

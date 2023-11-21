@@ -1,0 +1,38 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+  
+      <!-- Basic Alerts start -->
+      <section id="home-page">
+        <div class="row">
+          <div class="col-12">
+  
+            <!-- Messages Page -->
+            <div class="card" *ngFor="let message of messagesArray">
+                <div class="row card-body">
+                    <div class="d-block d-sm-flex row-cols-sm-2 row-cols-lg-1 col-lg-3 d-lg-block">
+                        <div>
+                            <span class="font-weight-bolder">Name:</span>
+                            <div class="pl-2 py-1">{{message.name}}</div>
+                        </div>
+                        <div>
+                            <span class="font-weight-bolder">Email:</span>
+                            <div class="pl-2 py-1">{{message.email}}</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div>
+                            <span class="font-weight-bolder">Message:</span> 
+                            <div class="pl-2 py-1">{{message.message}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+      <!-- Basic Alerts end -->
+    </div>
+  </div>
+
+

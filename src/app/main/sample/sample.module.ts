@@ -10,19 +10,20 @@ import { SampleComponent } from './sample.component';
 import { HomeComponent } from './home.component';
 import { DashboardModule } from 'app/modules/dashboard/dashboard.module';
 import { AuthGuard } from 'app/auth/helpers';
+import { MessagesComponent } from 'app/modules/messages/components/messages/messages.component';
 
 const routes = [
-  {
-    path: 'sample',
-    component: SampleComponent,
-    data: { animation: 'sample' },
-  },
+  // {
+  //   path: 'sample',
+  //   component: SampleComponent,
+  //   data: { animation: 'sample' },
+  // },
   {
     path: 'home',
     component: HomeComponent,
     data: { animation: 'home' },
     canActivate: [AuthGuard]
-  }
+  },
 ];
 
 @NgModule({

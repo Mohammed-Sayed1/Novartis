@@ -1,20 +1,24 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { Router } from '@angular/router';
-import { CoreConfigService } from '@core/services/config.service';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from "@angular/forms";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
+import { Router } from "@angular/router";
+import { CoreConfigService } from "@core/services/config.service";
 
 // adding authentication
-import { first } from 'rxjs/operators'
-import { AuthenticationService } from 'app/auth/service';
+import { first } from "rxjs/operators";
+import { AuthenticationService } from "app/auth/service";
 
 @Component({
-  selector: 'app-auth-login-v2',
-  templateUrl: './auth-login-v2.component.html',
-  styleUrls: ['./auth-login-v2.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-auth-login-v2",
+  templateUrl: "./auth-login-v2.component.html",
+  styleUrls: ["./auth-login-v2.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AuthLoginV2Component implements OnInit {
   //  Public
@@ -23,7 +27,7 @@ export class AuthLoginV2Component implements OnInit {
   public loading = false;
   public submitted = false;
   public returnUrl: string;
-  public error = '';
+  public error = "";
   public passwordTextType: boolean;
 
   // Private
@@ -48,17 +52,17 @@ export class AuthLoginV2Component implements OnInit {
     this._coreConfigService.config = {
       layout: {
         navbar: {
-          hidden: true
+          hidden: true,
         },
         menu: {
-          hidden: true
+          hidden: true,
         },
         footer: {
-          hidden: true
+          hidden: true,
         },
         customizer: false,
-        enableLocalStorage: false
-      }
+        enableLocalStorage: false,
+      },
     };
   }
 
@@ -76,26 +80,29 @@ export class AuthLoginV2Component implements OnInit {
 
   // adding authentication
   onSubmit() {
-    this.submitted = true
+    this.submitted = true;
     // stop here if form is invalid
     if (this.loginForm.invalid) {
-      return
+      return;
     }
     // Login
-    this.loading = true
+    this.loading = true;
     this._authenticationService
       .login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        data => {
+        (data) => {
           // this._router.navigate([this.returnUrl])
-          this._router.navigateByUrl('/home')
+          // this._router.navigateByUrl("/home");
         },
-        error => {
-          this.error = error
-          this.loading = false
+        (error) => {
+          this._router.navigateByUrl(
+            "/pages/authentication/login-v2?returnUrl=%2Fsample"
+          );
+          this.error = error;
+          this.loading = false;
         }
-      )
+      );
   }
 
   // Lifecycle Hooks
@@ -106,17 +113,19 @@ export class AuthLoginV2Component implements OnInit {
    */
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", Validators.required],
     });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this._route.snapshot.queryParams["returnUrl"] || "/";
 
     // Subscribe to config changes
-    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      this.coreConfig = config;
-    });
+    this._coreConfigService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        this.coreConfig = config;
+      });
   }
 
   /**
